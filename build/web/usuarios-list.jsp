@@ -15,32 +15,26 @@
         BL.delete(miId);
 
     }
-    
-    
+
     //creamos los usuarios 
-    if("CREATE".equalsIgnoreCase(miAccion)){
-      UsuarioEntity item = new UsuarioEntity();
-      item.setUsu_codigo(miId);
-      item.setUsu_descri(request.getParameter("name"));
-      item.setUsu_apepat(request.getParameter("name"));
-      item.setUsu_login(request.getParameter("name"));
-      BL.insertar(item);
+    if ("CREATE".equalsIgnoreCase(miAccion)) {
+        UsuarioEntity item = new UsuarioEntity();
+        item.setUsu_codigo(miId);
+        item.setUsu_descri(request.getParameter("name"));
+        item.setUsu_apepat(request.getParameter("name"));
+        item.setUsu_login(request.getParameter("name"));
+        BL.insertar(item);
     }
-      
+
     //actualizamos
- 
     if ("UPDATE".equalsIgnoreCase(miAccion)) {
-      UsuarioEntity item = new UsuarioEntity();
-      item.setUsu_codigo(miId);
-      item.setUsu_descri(request.getParameter("name"));
-      item.setUsu_apepat(request.getParameter("name"));
-      item.setUsu_login(request.getParameter("name"));
-      BL.actualizar(item);
+        UsuarioEntity item = new UsuarioEntity();
+        item.setUsu_codigo(miId);
+        item.setUsu_descri(request.getParameter("name"));
+        item.setUsu_apepat(request.getParameter("name"));
+        item.setUsu_login(request.getParameter("name"));
+        BL.actualizar(item);
     }
-    
-    
-    
-    
 
     List<UsuarioEntity> lista = BL.listar(); //listamos en una list de tipo usuarioEntity
 %>
@@ -53,46 +47,67 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Listado de usuarios <%=miAccion%> <%=miId%> </h1>
-        <a class='btn btn-outline-success' href='usuarios-edit.jsp?accion=CREATE'><i class='fa-solid fa-plus'></i>Nuevo<a/>
-            <a class='btn btn-outline-primary' href='usuarios-list.jsp?accion=REFRESH'><i class='fa-solid fa-refresh'></i>Actualizar<a/>
-                <button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-print"></i>&nbsp Imprimir</button>
+        <div id="wrapper">
+            <%@include file="includenavbar.jsp"%>
+            <div id="page-wrapper" class="gray-bg"> 
+                <%@include file="includenavbarheader.jsp"%>  
+                <%@include file="includepageheading.jsp"%> 
 
-                <table class="table table-hover" >
+                <div class="wrapper wrapper-content animated fadeInRight">
 
-                    <thead>
+                    <div class="row"> 
+                        <div class="col-lg-6">
+                        <div class="ibox ">
+                            <div class="ibox-content">
 
-                    <th>Acciones</th>
-                    <th> Codigo</th>
-                    <th> Descripcion</th>
+                                <a class='btn btn-outline-success' href='usuarios-edit.jsp?accion=CREATE'><i class='fa-solid fa-plus'></i>Nuevo<a/>
+                                    <a class='btn btn-outline-primary' href='usuarios-list.jsp?accion=REFRESH'><i class='fa-solid fa-refresh'></i>Actualizar<a/>
+                                        <button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-print"></i>&nbsp Imprimir</button>
 
-                    </thead>
+                                        <table class="table table-striped  table-hover" >
 
-                    <tbody>
-                        <%  for (int x = 0; x < lista.size(); x++) {
-                                UsuarioEntity item = lista.get(x);
-                                out.write("<tr>");
-                                
-                                out.write("<td>");
-                                out.write("<a class='btn btn-info' href='usuarios-edit.jsp?accion=UPDATE&id=" + item.getUsu_codigo() + "'><i class='fa-solid fa-pencil'></i><a/>");
-                                out.write(" ");
-                                out.write("<a class='btn btn-danger' href='usuarios-list.jsp?accion=DELETE&id=" + item.getUsu_codigo() + "'><i class='fa-solid fa-trash'></i><a/>");
-                                out.write("</td>");
-                                
-                                out.write("<td>" + item.getUsu_codigo() + "</td>");
-                                out.write("<td>" + item.getUsu_descri() + "</td>");
-                                
-                                out.write("</tr>");
-                            }
-                        %>
+                                            <thead>
 
-                    </tbody>
+                                            <th>Acciones</th>
+                                            <th> Codigo</th>
+                                            <th> Descripcion</th>
+
+                                            </thead>
+
+                                            <tbody>
+                                                <%  for (int x = 0; x < lista.size(); x++) {
+                                                        UsuarioEntity item = lista.get(x);
+                                                        out.write("<tr>");
+
+                                                        out.write("<td>");
+                                                        out.write("<a class='btn btn-info' href='usuarios-edit.jsp?accion=UPDATE&id=" + item.getUsu_codigo() + "'><i class='fa-solid fa-pencil'></i><a/>");
+                                                        out.write(" ");
+                                                        out.write("<a class='btn btn-danger' href='usuarios-list.jsp?accion=DELETE&id=" + item.getUsu_codigo() + "'><i class='fa-solid fa-trash'></i><a/>");
+                                                        out.write("</td>");
+
+                                                        out.write("<td>" + item.getUsu_codigo() + "</td>");
+                                                        out.write("<td>" + item.getUsu_descri() + "</td>");
+
+                                                        out.write("</tr>");
+                                                    }
+                                                %>
+
+                                            </tbody>
 
 
-                </table>
+                                        </table>
+                                        </div>
+                                        </div>
+                        </div>
 
+                                        
 
+                      </div>
+                       </div>
+                                 <%@include file="includefooter.jsp" %>
+                  </div>
+           </div>
 
-                <%@include file="includejs.jsp" %>
-                </body>
-                </html>
+          <%@include file="includejs.jsp" %>
+     </body>
+ </html>

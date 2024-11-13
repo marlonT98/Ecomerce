@@ -4,6 +4,7 @@ import BusinessEntity.UsuarioEntity;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class UsuarioDao extends ConexionMySQL {
 
@@ -109,7 +110,7 @@ public class UsuarioDao extends ConexionMySQL {
         try {
             String sql = "INSERT  xetbuser (usu_codigo ,usu_descri ,usu_login , usu_apepat,  usu_accniv) VALUE (?,?,?,?,?)";
             PreparedStatement pst = getConexion().prepareStatement(sql);
-            pst.setString(1, item.getUsu_codigo());
+            pst.setString(1, UUID.randomUUID().toString());//genera codigo de manera automatica
             pst.setString(2, item.getUsu_descri());
             pst.setString(3, item.getUsu_login());
             pst.setString(4, item.getUsu_apepat());
